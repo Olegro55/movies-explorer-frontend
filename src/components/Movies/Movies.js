@@ -1,10 +1,14 @@
-import "./Movies.css";
+import SearchForm from '../SearchForm/SearchForm';
+import Preloader from '../Preloader/Preloader';
+import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 const Movies = () => {
   return (
-    <h1>
-      Фильмы
-    </h1>
+    <main>
+      <Preloader />
+      <SearchForm />
+      <MoviesCardList />
+    </main>
   );
 };
 

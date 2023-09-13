@@ -1,11 +1,16 @@
-import "./SavedMovies.css";
+import SearchForm from '../SearchForm/SearchForm';
+import Preloader from '../Preloader/Preloader';
+import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 const SavedMovies = () => {
   return (
-    <h1>
-      Сохранённые фильмы
-    </h1>
+    <main>
+      <Preloader />
+      <SearchForm />
+      <MoviesCardList />
+    </main>
   );
 };
 
 export default SavedMovies;
+ 

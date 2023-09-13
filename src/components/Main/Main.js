@@ -1,5 +1,3 @@
-import "./Main.css";
-
 import MainSection from '../MainSection/MainSection';
 import Promo from '../Promo/Promo';
 import AboutProject from '../AboutProject/AboutProject';
