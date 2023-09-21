@@ -58,6 +58,12 @@
   }
 }
 
+@media screen and (max-width: 845px) {
+  .promo__logo {
+    width: 275px;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .promo {
     padding: 18.23% 6.51% 76px 6.51%;
@@ -79,6 +85,7 @@
   }
 
   .promo__logo {
+    width: auto;
     margin-bottom: 48px;
   }
 

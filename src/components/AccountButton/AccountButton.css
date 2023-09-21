@@ -1,0 +1,30 @@
+.account-button {
+  display: flex;
+  align-items: center;
+  column-gap: 7px;
+  height: 32px;
+  padding: 0 3px 0 11px;
+  background-color: #fff;
+  box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  color: #000;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer
+}
+
+.account-button_dark {
+  background-color: #2BE080;
+  box-shadow: none;
+}
+
+.account-button:hover {
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 768px) {
+  .account-button_hidable {
+    display: none;
+  }
+}

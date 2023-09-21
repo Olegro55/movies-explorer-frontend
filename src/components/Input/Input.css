@@ -14,12 +14,19 @@
   line-height: 17px;
 }
 
+.input__field_error {
+  color: #FF3055;
+}
+
 .input__field:focus {
   border-bottom-color: #3456F3;
 }
 
 .input__error {
+  display: block;
   color: #FF3055;
   font-size: 10px;
-  line-height: 12px;
+  height: 19px;
+  padding-top: 7px;
+  box-sizing: border-box;
 }

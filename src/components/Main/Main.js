@@ -9,6 +9,7 @@ const Main = () => {
   return (
     <main className="main">
       <Promo />
+      <a id="about-project" />
       <MainSection title="О проекте">
         <AboutProject />
       </MainSection>

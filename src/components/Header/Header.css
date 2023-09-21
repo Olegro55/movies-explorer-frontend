@@ -47,34 +47,13 @@
   column-gap: 30px;
 }
 
-.header__account-button {
-  display: flex;
-  align-items: center;
-  column-gap: 7px;
-  height: 32px;
-  padding: 0 3px 0 11px;
-  background-color: #fff;
-  box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
-  border-radius: 16px;
-  color: #000;
-  font-size: 13px;
-  font-weight: 500;
-  text-decoration: none;
-  cursor: pointer
-}
-
-.header__account-button_dark {
-  background-color: #2BE080;
-  box-shadow: none;
-}
-
 .header__login-button {
-  height: 32px;
   padding: 0 20px;
   background-color: #2BE080;
   border-radius: 3px;
   color: #000;
   font-size: 13px;
+  line-height: 32px;
   font-weight: 500;
   text-decoration: none;
   cursor: pointer
@@ -88,7 +67,6 @@
   cursor: pointer
 }
 
-.header__account-button:hover,
 .header__login-button:hover,
 .header__menu-button:hover {
   opacity: 0.8;
@@ -103,7 +81,6 @@
     padding: 0 30px;
   }
 
-  .header__account-button,
   .header__links {
     display: none;
   }
@@ -127,7 +104,7 @@
   }
 
   .header__login-button {
-    height: 26px;
+    line-height: 26px;
     padding: 0 12px;
     font-size: 10px;
     cursor: pointer 

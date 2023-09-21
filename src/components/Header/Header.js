@@ -2,16 +2,16 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 
 import "./Header.css";
 import logoPath from '../../images/logo.svg';
-import accountIconPath from '../../images/account-icon.svg';
 import menuIconWhitePath from '../../images/menu-icon-white.svg';
 import menuIconBlackPath from '../../images/menu-icon-black.svg';
+import AccountButton from "../AccountButton/AccountButton";
+import NavTab from "../NavTab/NavTab";
 
-const Header = () => {
+const Header = ({ isLoggedIn, isMenuOpened, onMenuOpen, onMenuClose }) => {
   const location = useLocation().pathname
 
-  let isLoggedIn = true;
-  let [headerClassName, accountButtonClassName, menuButtonSrc] = ["header", "header__account-button", menuIconBlackPath];
-  if (location === '/') [headerClassName, accountButtonClassName, menuButtonSrc] = ["header header_dark", "header__account-button header__account-button_dark", menuIconWhitePath];
+  let [headerClassName, accountButtonDark, menuButtonSrc] = ["header", false, menuIconBlackPath];
+  if (location === '/') [headerClassName, accountButtonDark, menuButtonSrc] = ["header header_dark", true, menuIconWhitePath];
 
   return (location === '/' || location === '/saved-movies' || location === '/movies' || location === '/profile') &&
     (
@@ -32,14 +32,14 @@ const Header = () => {
         <div className="header__account">
           {!isLoggedIn && <Link to="/signup" className="header__link">Регистрация</Link>}
           {!isLoggedIn ?
-          <Link to="/signip" className="header__login-button" >Войти</Link>
+            <Link to="/signin" className="header__login-button" >Войти</Link>
             :
-            <Link to="/profile" className={accountButtonClassName}>
-              Аккаунт
-              <img className="header__account-icon" src={accountIconPath} alt="иконка профиля" />
-            </Link>
+            <>
+              <AccountButton dark={accountButtonDark} hidable />
+              <button className="header__menu-button" onClick={onMenuOpen}><img className="header__menu-button-icon" src={menuButtonSrc} alt="кнопка меню" /></button>
+              <NavTab isOpened={isMenuOpened} onClose={onMenuClose} />
+            </>
           }
-          <button className="header__menu-button" ><img className="header__menu-button-icon" src={menuButtonSrc} alt="кнопка меню" /></button>
         </div>
       </header >
     );

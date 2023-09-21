@@ -30,8 +30,19 @@
   width: 100%;
 }
 
+.form__error {
+  display: block;
+  width: inherit;
+  height: 16px;
+  color: #FF3055;
+  text-align: center;
+  font-size: 11px;
+  line-height: 16px;
+}
+
 .form__button {
   width: 100%;
+  margin-top: 14px;
   padding: 0;
   background-color: #3456F3;
   cursor: pointer;
@@ -44,13 +55,19 @@
   color: #fff;
 }
 
+.form__button:disabled {
+  color: #C2C2C2;
+  cursor: default;
+  background-color: #F8F8F8;
+}
+
 @media screen and (max-width: 768px) {
   .form {
     flex-grow: 0;
   }
 
-  .form__button {
-    margin-top: 135px;
+  .form__fields {
+    margin-bottom: 105px;
   }
 }
 

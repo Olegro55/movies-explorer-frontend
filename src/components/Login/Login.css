@@ -17,6 +17,11 @@
   text-align: center;
 }
 
+.login__link {
+  color: #3456F3;
+  text-decoration: none;
+}
+
 @media screen and (max-width: 470px) {
   .login {
     width: 260px;
