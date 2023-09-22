@@ -45,6 +45,8 @@ const Register = () => {
           value={inputs.password}
           error={validationMessages.password}
           handleChange={handleInput}
+          minLength="4"
+          maxLength="100"
           required
         />
 
