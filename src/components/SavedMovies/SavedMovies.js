@@ -5,8 +5,8 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 const SavedMovies = () => {
   return (
     <main>
-      <Preloader />
       <SearchForm />
+      <Preloader />
       <MoviesCardList />
     </main>
   );
