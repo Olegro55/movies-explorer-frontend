@@ -55,6 +55,10 @@
   color: #fff;
 }
 
+.form__button:hover {
+  opacity: 0.8;
+}
+
 .form__button:disabled {
   color: #C2C2C2;
   cursor: default;
