@@ -5,7 +5,7 @@ import Form from "../Form/Form"
 import Input from "../Input/Input";
 import { useForm } from "../../hooks/useForm";
 
-const Login = ({ onLogin }) => {
+const Login = ({ onLogin, loginError }) => {
 
   const { inputs, validationMessages, isFormValid, handleInput } = useForm({
     email: "",
@@ -19,7 +19,7 @@ const Login = ({ onLogin }) => {
 
   return (
     <main className="login">
-      <Form name="login" title="Рады видеть!" buttonText="Войти" submitDisabled={!isFormValid} onSubmit={handleSubmit}>
+      <Form name="login" title="Рады видеть!" buttonText="Войти" submitDisabled={!isFormValid} serverError={loginError} onSubmit={handleSubmit}>
         <Input
           label="E-mail"
           name="email"

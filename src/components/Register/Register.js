@@ -6,17 +6,21 @@ import Input from "../Input/Input";
 import { useForm } from "../../hooks/useForm";
 
 
-const Register = () => {
-
+const Register = ({ onRegister, registrationError }) => {
   const { inputs, validationMessages, isFormValid, handleInput } = useForm({
     name: "",
     email: "",
     password: "",
   });
 
+  function handleSubmit(e) {
+    e.preventDefault();
+    onRegister(inputs);
+  }
+
   return (
     <main className="register">
-      <Form name="register" title="Добро пожаловать!" buttonText="Зарегистрироваться" submitDisabled={!isFormValid}>
+      <Form name="register" title="Добро пожаловать!" buttonText="Зарегистрироваться" submitDisabled={!isFormValid} serverError={registrationError} onSubmit={handleSubmit}>
         <Input
           label="Имя"
           name="name"
@@ -25,6 +29,8 @@ const Register = () => {
           handleChange={handleInput}
           minLength="2"
           maxLength="30"
+          pattern="[a-zA-Zа-яёА-ЯЁ\s\-]+"
+          title="Имя должно содержать только буквы, пробел или дефис."
           required
         />
 
