@@ -13,7 +13,10 @@ const Profile = ({ onLogout, onUpdateUser, updateMessage }) => {
     controls: 'controls-enabled',
   }
 
-  const { inputs, validationMessages, isFormValid, handleInput } = useForm(currentUser, true);
+  const { inputs, validationMessages, isFormValid, handleInput } = useForm({
+    name: currentUser.name,
+    email: currentUser.email,
+  }, true);
   const [mode, changeMode] = useState(defaultMode);
   const [submitDisabled, setSubmitDisabled] = useState(true);
 
@@ -31,13 +34,11 @@ const Profile = ({ onLogout, onUpdateUser, updateMessage }) => {
     });
   }
 
-  //-----------заглушка-----------
   function updateProfile(e) {
     e.preventDefault();
     changeMode(defaultMode);
     onUpdateUser(inputs);
   }
-  //------------------------------
 
   return (
     <main className="profile">
