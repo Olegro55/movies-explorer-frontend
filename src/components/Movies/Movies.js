@@ -64,7 +64,6 @@ const Movies = () => {
       foundMovies = foundMovies.filter(movie => movie.duration <= 40);
     setNoMoviesFound(foundMovies.length === 0);
     setMovies(foundMovies);
-    setCurrentPage(0);
   }
 
   function handleInput(e) {
@@ -82,6 +81,7 @@ const Movies = () => {
     setSearchError(false);
     setNoPrompt(false);
     setNoMoviesFound(false);
+    setCurrentPage(0);
 
     if (!prompt) {
       setNoPrompt(true);
