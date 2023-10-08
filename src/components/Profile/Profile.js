@@ -53,6 +53,7 @@ const Profile = ({ onLogout, onUpdateUser, updateMessage }) => {
             onChange={handleInput}
             minLength="2"
             maxLength="30"
+            pattern="[a-zA-Zа-яёА-ЯЁ\s\-]+"
             required
             disabled={mode.formDisabled}
           />
@@ -65,6 +66,7 @@ const Profile = ({ onLogout, onUpdateUser, updateMessage }) => {
             className="profile__info-input"
             value={inputs.email}
             onChange={handleInput}
+            pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$"
             required
             disabled={mode.formDisabled}
           />

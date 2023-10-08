@@ -27,6 +27,7 @@ const Login = ({ onLogin, loginError }) => {
           value={inputs.email}
           error={validationMessages.email}
           handleChange={handleInput}
+          pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$"
           required
         />
 
