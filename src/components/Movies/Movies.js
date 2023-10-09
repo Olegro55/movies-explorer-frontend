@@ -44,7 +44,7 @@ const Movies = () => {
     calculateWidth()
     window.addEventListener("resize", calculateWidth);
     return () => {
-        window.removeEventListener("resize", calculateWidth);
+      window.removeEventListener("resize", calculateWidth);
     };
   }, [])
 
@@ -109,26 +109,22 @@ const Movies = () => {
     }
   }
 
-  function handleSave(movie) {
-    api.saveMovie(movie)
-      .then(() => {
-        reloadSavedMovies()
-          .then(() => {
-            filterShorts(onlyShorts);
-          });
+  function handleSave(data) {
+    api.saveMovie(data)
+      .then((movie) => {
+        setSavedMovies([...savedMovies, movie]);
+        filterShorts(onlyShorts);
       })
       .catch((err) => {
         console.log(err);
       });
   }
 
-  function handleDelete(movie) {
-    api.deleteMovie(movie)
-      .then(() => {
-        reloadSavedMovies()
-          .then(() => {
-            filterShorts(onlyShorts);
-          });
+  function handleDelete(data) {
+    api.deleteMovie(data)
+      .then((deletedMovie) => {
+        setSavedMovies(savedMovies.filter(movie => movie._id !== deletedMovie._id));
+        filterShorts(onlyShorts);
       })
       .catch((err) => {
         console.log(err);
@@ -164,7 +160,7 @@ const Movies = () => {
   const displayedMovies = movies.slice(0, calculateCardsAmount());
 
   const moviesCards = displayedMovies.map((movie) => {
-    const savedMovieData = savedMovies.find(savedMovie => savedMovie.movieId === movie.id)
+    const savedMovieData = savedMovies.find(savedMovie => savedMovie.movieId === movie.id);
     if (savedMovieData !== undefined) {
       movie.owner = savedMovieData.owner;
       movie._id = savedMovieData._id;

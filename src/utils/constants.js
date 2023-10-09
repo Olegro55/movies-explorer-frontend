@@ -1,6 +1,5 @@
 export const mainApiConfig = {
-  //baseUrl: 'https://api.movies-front.nomoredomainsicu.ru',
-  baseUrl: 'http://localhost:3030',
+  baseUrl: 'https://api.movies-front.nomoredomainsicu.ru',
   headers: {
     'Content-Type': 'application/json'
   }
