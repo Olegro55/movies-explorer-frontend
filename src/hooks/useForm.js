@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-export function useForm(inputValues = {}) {
+export function useForm(inputValues = {}, loadAsValid = false) {
   const fields = Object.keys(inputValues);
   const [inputs, setInputs] = useState(inputValues);
-  const [validationMessages, setValidationMessages] = useState(Object.fromEntries(fields.map((key) => [key, ""])));
+  const [validationMessages, setValidationMessages] = useState(Object.fromEntries(fields.map((key) => [key, loadAsValid ? "" : " "])));
   const isFormValid = Object.values(validationMessages).every(message => message === "");
 
   const handleInput = (e) => {

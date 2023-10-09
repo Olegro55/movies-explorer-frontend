@@ -1,11 +1,11 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 
 import "./Profile.css";
 
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { useForm } from "../../hooks/useForm";
 
-const Profile = ({ onLogout, onUpdateUser }) => {
+const Profile = ({ onLogout, onUpdateUser, updateMessage }) => {
   const currentUser = useContext(CurrentUserContext);
 
   const defaultMode = {
@@ -13,9 +13,19 @@ const Profile = ({ onLogout, onUpdateUser }) => {
     controls: 'controls-enabled',
   }
 
-  const { inputs, validationMessages, isFormValid, handleInput } = useForm(currentUser);
-  const [serverError, setServerError] = useState("")
-  const [mode, changeMode] = useState(defaultMode)
+  const { inputs, validationMessages, isFormValid, handleInput } = useForm({
+    name: currentUser.name,
+    email: currentUser.email,
+  }, true);
+  const [mode, changeMode] = useState(defaultMode);
+  const [submitDisabled, setSubmitDisabled] = useState(true);
+
+  useEffect(() => {
+    if (inputs.name === currentUser.name && inputs.email === currentUser.email)
+      setSubmitDisabled(true);
+    else
+      setSubmitDisabled(!isFormValid);
+  }, [inputs]);
 
   function enableEditing() {
     changeMode({
@@ -24,14 +34,11 @@ const Profile = ({ onLogout, onUpdateUser }) => {
     });
   }
 
-//-----------заглушка-----------
   function updateProfile(e) {
     e.preventDefault();
     changeMode(defaultMode);
     onUpdateUser(inputs);
-    setServerError("При обновлении профиля произошла ошибка.");
   }
-//------------------------------
 
   return (
     <main className="profile">
@@ -46,10 +53,11 @@ const Profile = ({ onLogout, onUpdateUser }) => {
             onChange={handleInput}
             minLength="2"
             maxLength="30"
+            pattern="[a-zA-Zа-яёА-ЯЁ\s\-]+"
             required
             disabled={mode.formDisabled}
           />
-          <span className="profile__error">{validationMessages.name}</span>
+          <span className="profile__message profile__error">{validationMessages.name}</span>
           <div className="profile__info_separator"></div>
           <p className="profile__info-label">E-mail</p>
           <input
@@ -58,16 +66,21 @@ const Profile = ({ onLogout, onUpdateUser }) => {
             className="profile__info-input"
             value={inputs.email}
             onChange={handleInput}
+            pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$"
             required
             disabled={mode.formDisabled}
           />
-          <span className="profile__error">{validationMessages.email}</span>
+          <span className="profile__message profile__error">{validationMessages.email}</span>
         </fieldset>
-        <span className="profile__error">{serverError}</span>
+        <span
+          className={`profile__message ${updateMessage.success ? "profile__success" : "profile__error"}`}
+        >
+          {updateMessage.message}
+        </span>
         <button
           type="submit"
           className={`profile__save${mode.formDisabled ? " profile__save_hidden" : ""}`}
-          disabled={!isFormValid}
+          disabled={submitDisabled}
         >
           Сохранить
         </button>

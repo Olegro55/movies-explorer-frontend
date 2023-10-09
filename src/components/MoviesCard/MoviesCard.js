@@ -1,14 +1,53 @@
+import { useContext } from "react";
+
 import "./MoviesCard.css";
 
-const MoviesCard = () => {
-  let isLiked = true;
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+
+const MoviesCard = ({ movie, isFromSearch, onSave, onDelete }) => {
+  const currentUser = useContext(CurrentUserContext);
+  const isSaved = movie.owner === currentUser.id;
+
+  const imageUrl = isFromSearch ? `https://api.nomoreparties.co${movie.image.url}` : movie.image;
+  const thumbnail = isFromSearch ? `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}` : movie.thumbnail;
+  const hours = Math.floor(movie.duration / 60);
+  const minutes = movie.duration % 60;
+  const duration = `${hours}ч ${minutes}м`;
+
+  function handleSave() {
+    const data = {
+      country: movie.country,
+      director: movie.director,
+      duration: movie.duration,
+      year: movie.year,
+      description: movie.description,
+      image: imageUrl,
+      trailerLink: movie.trailerLink,
+      nameRU: movie.nameRU,
+      nameEN: movie.nameEN,
+      thumbnail: thumbnail,
+      movieId: movie.id,
+    }
+    onSave(data);
+  }
+
+  function handleDelete() {
+    onDelete(movie);
+  }
 
   return (
     <div className="card">
-      <img className="card__image" src="https://api.nomoreparties.co/uploads/thumbnail_stones_in_exile_b2f1b8f4b7.jpeg" alt="" />
-      <h2 className="card__name">33 слова о дизайне</h2>
-      <button type="button" aria-label="лайк" className={`card__like ${isLiked && 'card__like_active'}`} />
-      <p className="card__duration">1ч42м</p>
+      <a className="card__link" target="_blank" href={movie.trailerLink}>
+        <img className="card__image" src={imageUrl} alt="" />
+      </a>
+      <h2 className="card__name">{movie.nameRU}</h2>
+      {
+        isFromSearch ?
+          <button type="button" aria-label="сохранить" className={`card__save${isSaved ? ' card__save_active' : ''}`} onClick={isSaved ? handleDelete : handleSave} />
+          :
+          <button type="button" aria-label="удалить" className="card__delete" onClick={handleDelete} />
+      }
+      <p className="card__duration">{duration}</p>
     </div>
   );
 };
